@@ -1,0 +1,28 @@
+{
+  "name": "2024newyear",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lieyan666/2024NewYear.git"
+  },
+  "keywords": [
+    "2024"
+  ],
+  "author": "lieyan",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/lieyan666/2024NewYear/issues"
+  },
+  "homepage": "https://github.com/lieyan666/2024NewYear#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security"
+  }
+}

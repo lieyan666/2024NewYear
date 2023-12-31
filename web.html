@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2024</title>
-    <!-- 引入 Vue 3 -->
+    <!-- 引入 Vue 3 --> 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
       body {
@@ -59,12 +59,24 @@
 
   <body>
     <div id="app">
+        <div id="content">
+            <h2>2024 Happy New Year!</h2>
+          </div>
+          <br><br>
+      <div id="content">
+        <h1>随机名字</h1>
+        <!-- <h2>2024 Happy New Year!</h2> -->
+        <button @click="fetchName">获取名字</button>
+        <p v-if="nameResult !== null">{{ nameResult }}</p>
+        <p v-if="nameError !== null" class="error">{{ nameError }}</p>
+      </div>
+      <br>
       <div id="content">
         <h1>随机句子</h1>
-        <h2>2024 Happy New Year!</h2>
-        <button @click="fetchData">获取数据</button>
-        <p v-if="result !== null">{{ result }}</p>
-        <p v-if="error !== null" class="error">{{ error }}</p>
+        <!-- <h2>2024 Happy New Year!</h2> -->
+        <button @click="fetchSentence">获取句子</button>
+        <p v-if="sentenceResult !== null">{{ sentenceResult }}</p>
+        <p v-if="sentenceError !== null" class="error">{{ sentenceError }}</p>
       </div>
     </div>
 
@@ -72,23 +84,37 @@
       const app = Vue.createApp({
         data() {
           return {
-            result: null,
-            error: null,
+            sentenceResult: null,
+            sentenceError: null,
+            nameResult: null,
+            nameError: null,
           };
         },
         methods: {
-          async fetchData() {
+          async fetchSentence() {
             try {
               const response = await fetch("/api/random-sentence"); // 替换为你的后端 API 地址
               const data = await response.json();
               const sentence = data.sentence;
-
-              this.result = sentence;
-              this.error = null;
+              this.sentenceResult = sentence;
+              this.sentenceError = null;
             } catch (error) {
               console.error("Error fetching data:", error);
-              this.result = null;
-              this.error = "API Error";
+              this.sentenceResult = null;
+              this.sentenceError = "API Error";
+            }
+          },
+          async fetchName() {
+            try {
+              const response = await fetch("/api/random-name"); // 替换为你的后端 API 地址
+              const data = await response.json();
+              const name = data.name;
+              this.nameResult = name;
+              this.nameError = null;
+            } catch (error) {
+              console.error("Error fetching data:", error);
+              this.nameResult = null;
+              this.nameError = "API Error";
             }
           },
         },

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write app.js"
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",

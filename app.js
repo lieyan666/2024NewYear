@@ -2,7 +2,7 @@
  * @Author: Lieyan
  * @Date: 2023-12-31 20:40:02
  * @LastEditors: Lieyan
- * @LastEditTime: 2023-12-31 20:56:43
+ * @LastEditTime: 2023-12-31 21:10:51
  * @FilePath: /2024NewYear/app.js
  * @Description:
  * @Contact: QQ: 2102177341  Website: lieyan.space  Github: @lieyan666
@@ -10,6 +10,7 @@
  */
 const express = require("express");
 const fs = require("fs/promises"); // 使用 fs.promises 进行异步文件操作
+const path = require("path");
 const app = express();
 
 const port = 52024;
@@ -44,9 +45,14 @@ app.get("/api/random-sentence", async (req, res) => {
   res.json({ sentence: randomSentence });
 });
 
+app.get("/web", (req, res) => {
+  const filePath = path.join(__dirname, "web.html");
+  res.sendFile(filePath);
+});
+
 app.get("/", async (req, res) => {
-    res.send("2024 New Year Event. API By Chy Lieyan");
-  });
+  res.send("2024 New Year Event. API By Chy Lieyan");
+});
 
 // 启动服务
 app.listen(port, () => {

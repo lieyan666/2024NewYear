@@ -2,7 +2,7 @@
  * @Author: Lieyan
  * @Date: 2023-12-31 20:40:02
  * @LastEditors: Lieyan
- * @LastEditTime: 2023-12-31 22:14:36
+ * @LastEditTime: 2023-12-31 22:48:23
  * @FilePath: /2024NewYear/app.js
  * @Description:
  * @Contact: QQ: 2102177341  Website: lieyan.space  Github: @lieyan666
@@ -87,13 +87,13 @@ function getTime() {
 app.get("/api/random-sentence", async (req, res) => {
   const randomSentence = await getRandomSentence();
   let time = getTime();
-  console.log(`{${++cntS}} [${time}] : ${randomSentence}`);
+  console.log(`{Sentence ${++cntS}} [${time}] : ${randomSentence}`);
   res.json({ sentence: randomSentence });
 });
 app.get("/api/random-name", async (req, res) => {
   const randomName = await getRandomName();
   let time = getTime();
-  console.log(`{${++cntN}} [${time}] : ${randomName}`);
+  console.log(`{Name ${++cntN}} [${time}] : ${randomName}`);
   res.json({ name: randomName });
 });
 

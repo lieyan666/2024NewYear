@@ -32,17 +32,17 @@ async function readSentencesFromFile() {
   }
 }
 async function readNamesFromFile() {
-    try {
-      const data = await fs.readFile("names.txt", "utf-8");
-      return data
-        .split("\n")
-        .map((line) => line.trim())
-        .filter((line) => line !== "");
-    } catch (error) {
-      console.error("Error reading names from file:", error.message);
-      return [];
-    }
+  try {
+    const data = await fs.readFile("names.txt", "utf-8");
+    return data
+      .split("\n")
+      .map((line) => line.trim())
+      .filter((line) => line !== "");
+  } catch (error) {
+    console.error("Error reading names from file:", error.message);
+    return [];
   }
+}
 
 // 获取随机句子
 async function getRandomSentence() {
@@ -55,13 +55,13 @@ async function getRandomSentence() {
 }
 // 获取随机名字
 async function getRandomName() {
-    const names = await readNamesFromFile();
-    if (names.length === 0) {
-      return "No name available.";
-    }
-    const randomIndex = Math.floor(Math.random() * names.length);
-    return names[randomIndex];
+  const names = await readNamesFromFile();
+  if (names.length === 0) {
+    return "No name available.";
   }
+  const randomIndex = Math.floor(Math.random() * names.length);
+  return names[randomIndex];
+}
 
 function getTime() {
   // 获取当前时间
@@ -91,11 +91,11 @@ app.get("/api/random-sentence", async (req, res) => {
   res.json({ sentence: randomSentence });
 });
 app.get("/api/random-name", async (req, res) => {
-    const randomName = await getRandomName();
-    let time = getTime();
-    console.log(`{${++cntN}} [${time}] : ${randomName}`);
-    res.json({ name: randomName });
-  });
+  const randomName = await getRandomName();
+  let time = getTime();
+  console.log(`{${++cntN}} [${time}] : ${randomName}`);
+  res.json({ name: randomName });
+});
 
 app.get("/web", (req, res) => {
   const filePath = path.join(__dirname, "web.html");

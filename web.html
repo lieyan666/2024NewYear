@@ -1,102 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2024</title>
+    <!-- 引入 Vue 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2024</title>
-  <!-- 引入 Vue 3 -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
-  <style>
-    body {
-      font-family: "Arial", sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f0f0f0;
-    }
+      #content {
+        text-align: center;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+      }
 
-    #content {
-      text-align: center;
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease-in-out;
-    }
+      #content:hover {
+        transform: scale(1.05);
+      }
 
-    #content:hover {
-      transform: scale(1.05);
-    }
+      button {
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #3498db;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease-in-out;
+      }
 
-    button {
-      padding: 10px 15px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #3498db;
-      color: #ffffff;
-      border: none;
-      border-radius: 4px;
-      transition: background-color 0.3s ease-in-out;
-    }
+      button:hover {
+        background-color: #2980b9;
+      }
 
-    button:hover {
-      background-color: #2980b9;
-    }
+      #app p {
+        font-size: 3rem;
+        margin: 20px 0;
+        color: #333333;
+      }
 
-    #app p {
-      font-size: 3rem;
-      margin: 20px 0;
-      color: #333333;
-    }
+      #app p.error {
+        color: red;
+      }
+    </style>
+  </head>
 
-    #app p.error {
-      color: red;
-    }
-  </style>
-</head>
-
-<body>
-  <div id="app">
-    <div id="content">
-      <h1>随机句子</h1>
-      <h2>2024 Happy New Year!</h2>
-      <button @click="fetchData">获取数据</button>
-      <p v-if="result !== null">{{ result }}</p>
-      <p v-if="error !== null" class="error">{{ error }}</p>
+  <body>
+    <div id="app">
+      <div id="content">
+        <h1>随机句子</h1>
+        <h2>2024 Happy New Year!</h2>
+        <button @click="fetchData">获取数据</button>
+        <p v-if="result !== null">{{ result }}</p>
+        <p v-if="error !== null" class="error">{{ error }}</p>
+      </div>
     </div>
-  </div>
 
-  <script>
-    const app = Vue.createApp({
-      data() {
-        return {
-          result: null,
-          error: null,
-        };
-      },
-      methods: {
-        async fetchData() {
-          try {
-            const response = await fetch("/api/random-sentence"); // 替换为你的后端 API 地址
-            const data = await response.json();
-            const sentence = data.sentence;
-
-            this.result = sentence;
-            this.error = null;
-          } catch (error) {
-            console.error("Error fetching data:", error);
-            this.result = null;
-            this.error = "API Error";
-          }
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            result: null,
+            error: null,
+          };
         },
-      },
-    });
+        methods: {
+          async fetchData() {
+            try {
+              const response = await fetch("/api/random-sentence"); // 替换为你的后端 API 地址
+              const data = await response.json();
+              const sentence = data.sentence;
 
-    app.mount("#app");
-  </script>
-</body>
+              this.result = sentence;
+              this.error = null;
+            } catch (error) {
+              console.error("Error fetching data:", error);
+              this.result = null;
+              this.error = "API Error";
+            }
+          },
+        },
+      });
 
+      app.mount("#app");
+    </script>
+  </body>
 </html>

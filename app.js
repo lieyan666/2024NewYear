@@ -2,7 +2,7 @@
  * @Author: Lieyan
  * @Date: 2023-12-31 20:40:02
  * @LastEditors: Lieyan
- * @LastEditTime: 2023-12-31 21:10:51
+ * @LastEditTime: 2023-12-31 21:29:46
  * @FilePath: /2024NewYear/app.js
  * @Description:
  * @Contact: QQ: 2102177341  Website: lieyan.space  Github: @lieyan666
@@ -14,6 +14,8 @@ const path = require("path");
 const app = express();
 
 const port = 52024;
+
+var cnt = 0;
 
 // 从文件中读取句子
 async function readSentencesFromFile() {
@@ -39,14 +41,40 @@ async function getRandomSentence() {
   return sentences[randomIndex];
 }
 
+function getTime(){
+// 获取当前时间
+const currentTime = new Date();
+const formattedTime = `${currentTime.getFullYear()}-${(
+  currentTime.getMonth() + 1
+)
+  .toString()
+  .padStart(2, "0")}-${currentTime
+  .getDate()
+  .toString()
+  .padStart(2, "0")} ${currentTime
+  .getHours()
+  .toString()
+  .padStart(2, "0")}:${currentTime
+  .getMinutes()
+  .toString()
+  .padStart(2, "0")}:${currentTime.getSeconds().toString().padStart(2, "0")}`;
+  return formattedTime;
+}
+
 // 定义 API
 app.get("/api/random-sentence", async (req, res) => {
   const randomSentence = await getRandomSentence();
+  let time = getTime();
+  console.log(`{${++cnt}} [${time}] : ${randomSentence}`);
   res.json({ sentence: randomSentence });
 });
 
 app.get("/web", (req, res) => {
   const filePath = path.join(__dirname, "web.html");
+  // 获取时间和ip
+  const time = getTime();
+  const ip = req.ip;
+  console.log(`[${time}] [${ip}] Get Web Page`);
   res.sendFile(filePath);
 });
 
